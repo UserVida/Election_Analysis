@@ -44,11 +44,10 @@ The analysis of the election show that:
   * Arapahoe
 
 * The county results were:
-  * Jefferson: 10.5% (38855)
-  * Denver: 82.8% (306055)
-  * Arapahoe: 6.7% (24801)
-
-* The county with the greatest number of votes is **Denver**. 
+  * Jefferson county had 10.5% of the vote and 38855 number of votes.
+  * Denver county had 82.8% of the vote and 306055 number of votes.
+  * Arapahoe county had 6.7% of the vote abd 24801 number of votes.
+* The county with the greatest number of votes is **Denver**, which had the highest voter turnout at 82,8% with 306055 votes. 
 
 * The candidates were: 
   * Charles Casper Stockham
@@ -62,3 +61,29 @@ The analysis of the election show that:
   * **Diana DeGette** who received 73.8% of the vote and 272,892 number of votes.
   
 ### Audit Summary
+
+The election audit script presented in this project can be utilized in other forms of elections with slight modifications. For the script to execute successfully, the tabulated data of votes must be in csv format. The code grabs the vote count, candidate name and county name from row indexes 0, 1 and 2 of the csv data. The codes assumes that all csv voting data will be organized in this order. To prevent misread row information, a code can be added to print the row headers in the terminal. If any of the rows in the csv file are not in the order assumed by the code, the index number used to retrieve the vote count, candidate name and county name can be changed to match the correct row. 
+The print code would be written underneath the following code in the script:
+header = next(reader)
+print(header) 
+
+Another potential modification is renaming the county variables. County variables such as county_list and county_votes can be renamed accordingly to match the electoral district being used to group and count the votes. Using the find and replace function in the code editor, all instances of the specific variable will be replaced with the new appropriate variable name. In Vs Code, this can be achieved using CTRL + H or clicking on the Edit tab on the top ribbon and select Replace from the scroll down menu.
+
+IMAGE
+
+As voting data is sensitive and extremely important, maintaining the structure of the code is also extremely important. Converting the list of candidates and counties into tuples after collecting all the unique values through the code will add an extra layer of protection against any changes that may happen elsewhere in the code if more modifications occur. 
+
+The covert to tuple code would follow after all the unique values were appended to the candidate and county list. 
+
+# If the candidate does not match any existing candidate add it to the candidate list
+        if candidate_name not in candidate_options:
+
+            # Add the candidate name to the candidate list.
+            candidate_options.append(candidate_name)
+
+            # And begin tracking that candidate's voter count.
+            candidate_votes[candidate_name] = 0
+
+    candidate_options = tuple(candidate_options)
+    print(candidate_options)
+
