@@ -1,6 +1,8 @@
 # Election_Analysis
 
-## Purpose
+## Overview of Election Audit
+
+### Purpose
 
 The purpose of this project was to write an automated code in python that can be used to prepare an 
 election audit to certify the election results based on the popular vote for American congressional 
@@ -33,7 +35,7 @@ The election commission requested additional information on the votes for each c
 
 ### Audit Results
 
-INSERT IMAGE
+![election_analysis_summary](https://user-images.githubusercontent.com/97644424/160332533-ee189d8a-f7df-4c74-92a4-06d82fca5b75.PNG)
 
 The analysis of the election show that:
 * There were **369, 711** votes cast in the election.
@@ -63,27 +65,25 @@ The analysis of the election show that:
 ### Audit Summary
 
 The election audit script presented in this project can be utilized in other forms of elections with slight modifications. For the script to execute successfully, the tabulated data of votes must be in csv format. The code grabs the vote count, candidate name and county name from row indexes 0, 1 and 2 of the csv data. The codes assumes that all csv voting data will be organized in this order. To prevent misread row information, a code can be added to print the row headers in the terminal. If any of the rows in the csv file are not in the order assumed by the code, the index number used to retrieve the vote count, candidate name and county name can be changed to match the correct row. 
+
 The print code would be written underneath the following code in the script:
-header = next(reader)
-print(header) 
+
+         header = next(reader)
+         print(header) 
 
 Another potential modification is renaming the county variables. County variables such as county_list and county_votes can be renamed accordingly to match the electoral district being used to group and count the votes. Using the find and replace function in the code editor, all instances of the specific variable will be replaced with the new appropriate variable name. In Vs Code, this can be achieved using CTRL + H or clicking on the Edit tab on the top ribbon and select Replace from the scroll down menu.
 
-IMAGE
+![FindandReplace](https://user-images.githubusercontent.com/97644424/160332511-30155d40-86a5-4eb5-b4a9-3db9bb2e056f.PNG)
 
 As voting data is sensitive and extremely important, maintaining the structure of the code is also extremely important. Converting the list of candidates and counties into tuples after collecting all the unique values through the code will add an extra layer of protection against any changes that may happen elsewhere in the code if more modifications occur. 
 
 The covert to tuple code would follow after all the unique values were appended to the candidate and county list. 
 
-# If the candidate does not match any existing candidate add it to the candidate list
+
         if candidate_name not in candidate_options:
-
-            # Add the candidate name to the candidate list.
             candidate_options.append(candidate_name)
-
-            # And begin tracking that candidate's voter count.
             candidate_votes[candidate_name] = 0
 
     candidate_options = tuple(candidate_options)
-    print(candidate_options)
+    
 
